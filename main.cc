@@ -1,79 +1,201 @@
 #include <iostream> 
 #include <map>
 #include <string>
+#include <cstdlib>
 
 
 std::map<std::string, char> positions;
 
 void displayBoard (const std::map<std::string, char>& positions) {
 
-    std::cout << positions.at("1") << std::endl;
-    std::cout << positions.at("2") << std::endl;
-    std::cout << positions.at("3") << std::endl;
+    system("clear");
+    std::cout << "   Tic-Tac-Toe " << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "     |     | " << std::endl;
+    std::cout << "  " << positions.at("1") << "  " << "|" << "  " << positions.at("2") << "  " << "|" << "  " << positions.at("3") << "  " << std::endl;
+    std::cout << "_____|_____|_____ " << std::endl;
+    std::cout << "     |     | " << std::endl;
+    std::cout << "  " << positions.at("4") << "  " << "|" << "  " << positions.at("5") << "  " << "|" << "  " << positions.at("6") << "  " << std::endl;
+    std::cout << "_____|_____|_____ " << std::endl;
+    std::cout << "     |     | " << std::endl;
+    std::cout << "  " << positions.at("7") << "  " << "|" << "  " << positions.at("8") << "  " << "|" << "  " << positions.at("9") << "  " << std::endl;
+    std::cout << "     |     | " << std::endl;
+   
 }
 
 void updateBoard(std::map<std::string, char>& positions, std::string position, char symbol) {
     positions[position] = symbol;
+    system("clear");
     displayBoard(positions);
 }
 
+bool isGameover(const std::map<std::string, char>& positions) {\
+
+    bool allPositionsTaken = true;
+    for (char i = '1'; i <= '9'; ++i) {
+        if (positions.at(std::string(1, i)) != 'x' && positions.at(std::string(1, i)) != 'o') {
+            allPositionsTaken = false;
+            break;
+        }
+    }
+
+    if (allPositionsTaken) {
+        std::cout << "It's a draw!" << std::endl;
+        return true;
+    }
+
+    // Checking for winning conditions
+    // Left to right for player 1
+    if (positions.at("1") == 'x' && positions.at("2") == 'x' && positions.at("3") == 'x') {
+        std::cout << "Player 1 won!" << std::endl;
+        return true;
+    }
+
+    else if (positions.at("4") == 'x' && positions.at("5") == 'x' && positions.at("6") == 'x') {
+        std::cout << "Player 1 won!" << std::endl;
+        return true;
+    }
+
+    else if (positions.at("7") == 'x' && positions.at("8") == 'x' && positions.at("9") == 'x') {
+        std::cout << "Player 1 won!" << std::endl;
+        return true;
+    }
+
+    // Up and down for player 1
+
+    else if (positions.at("1") == 'x' && positions.at("4") == 'x' && positions.at("7") == 'x') {
+        std::cout << "Player 1 won!" << std::endl;
+        return true;
+    }
+
+    else if (positions.at("2") == 'x' && positions.at("5") == 'x' && positions.at("8") == 'x') {
+        std::cout << "Player 1 won!" << std::endl;
+        return true;
+    }
+
+    else if (positions.at("3") == 'x' && positions.at("6") == 'x' && positions.at("9") == 'x') {
+        std::cout << "Player 1 won!" << std::endl;
+        return true;
+    }
+
+    // Diagnol for player 1
+
+    else if (positions.at("1") == 'x' && positions.at("5") == 'x' && positions.at("9") == 'x') {
+        std::cout << "Player 1 won!" << std::endl;
+        return true;
+    }
+
+    else if (positions.at("3") == 'x' && positions.at("5") == 'x' && positions.at("7") == 'x') {
+        std::cout << "Player 1 won!" << std::endl;
+        return true;
+    }
+
+    // Check left to right for player 2
+    if (positions.at("1") == 'o' && positions.at("2") == 'o' && positions.at("3") == 'o') {
+        std::cout << "Player 2 won!" << std::endl;
+        return true;
+    }
+
+    else if (positions.at("4") == 'o' && positions.at("5") == 'o' && positions.at("6") == 'o') {
+        std::cout << "Player 2 won!" << std::endl;
+        return true;
+    }
+
+    else if (positions.at("7") == 'o' && positions.at("8") == 'o' && positions.at("9") == 'o') {
+        std::cout << "Player 2 won!" << std::endl;
+        return true;
+    }
+
+    // Up and down for player 2
+
+    else if (positions.at("1") == 'o' && positions.at("4") == 'o' && positions.at("7") == 'o') {
+        std::cout << "Player 2 won!" << std::endl;
+        return true;
+    }
+
+    else if (positions.at("2") == 'o' && positions.at("5") == 'o' && positions.at("8") == 'o') {
+        std::cout << "Player 2 won!" << std::endl;
+        return true;
+    }
+
+    else if (positions.at("3") == 'o' && positions.at("6") == 'o' && positions.at("9") == 'o') {
+        std::cout << "Player 2 won!" << std::endl;
+        return true;
+    }
+
+    // Diagnol for player 2
+
+    else if (positions.at("1") == 'o' && positions.at("5") == 'o' && positions.at("9") == 'o') {
+        std::cout << "Player 2 won!" << std::endl;
+        return true;
+    }
+
+    else if (positions.at("3") == 'o' && positions.at("5") == 'o' && positions.at("7") == 'o') {
+        std::cout << "Player 2 won!" << std::endl;
+        return true;
+    }
+
+
+
+
+
+
+
+    return false;
+}
+
+
 int main() {
-
-    std::cout << "   Tic-Tac-Toe " << std::endl;
-    std::cout << std::endl;
-
     positions.insert({"1", '1'});
     positions.insert({"2", '2'});
     positions.insert({"3", '3'});
+    positions.insert({"4", '4'});
+    positions.insert({"5", '5'});
+    positions.insert({"6", '6'});
+    positions.insert({"7", '7'});
+    positions.insert({"8", '8'});
+    positions.insert({"9", '9'});
 
     displayBoard(positions);
 
-    std::string player1choice;
-    std::cout << "Player 1 choose: ";
-    std::cin >> player1choice;
-    
-    updateBoard(positions, player1choice, 'x');
+    while (!isGameover(positions)) {
+        std::string player1choice;
+        while (true) {
+            std::cout << "Player 1 choose a position: ";
+            std::cin >> player1choice;
 
-    std::string player2choice;
-    std::cout << "Player 2 choose: ";
-    std::cin >> player2choice;
-    
-    updateBoard(positions, player2choice, 'o');
+            if (player1choice != "1" && player1choice != "2" && player1choice != "3" && player1choice != "4"&& player1choice != "5" && player1choice != "6" && 
+                player1choice != "7" && player1choice != "8" && player1choice != "9") {
+                std::cout << "Invalid input, try again" << std::endl;
+            } else {
+                break;
+            }
+        }
+        updateBoard(positions, player1choice, 'x');
+
+        if (isGameover(positions)) {
+            break;
+        }
+
+        std::string player2choice;
+        while (true) {
+            std::cout << "Player 2 choose a position: ";
+            std::cin >> player2choice;
+
+            if (player2choice != "1" && player2choice != "2" && player2choice != "3" && player2choice != "4"&& player2choice != "5" && player2choice != "6" && 
+                player2choice != "7" && player2choice != "8" && player2choice != "9") {
+                std::cout << "Invalid input, try again" << std::endl;
+            } else {
+                break;
+            }
+        }
+        updateBoard(positions, player2choice, 'o');
+
+        if (isGameover(positions)) {
+            break;
+        }   
+    }
 
     return 0;
-    
-
-    /*
-    char position_1 = '1'; 
-    char position_3 = '3'; 
-    char position_2 = '2'; 
-    char position_4 = '4'; 
-    char position_5 = '5'; 
-    char position_6 = '6'; 
-    char position_7 = '7'; 
-    char position_8 = '8'; 
-    char position_9 = '9'; 
-
-
-    std::cout << "     |     | " << std::endl;
-    std::cout << "  " << position_1 << "  " << "|" << "  " << position_2 << "  " << "|" << "  " << position_3 << "  " << std::endl;
-    std::cout << "_____|_____|_____ " << std::endl;
-    std::cout << "     |     | " << std::endl;
-    std::cout << "  " << position_4 << "  " << "|" << "  " << position_5 << "  " << "|" << "  " << position_6 << "  " << std::endl;
-    std::cout << "_____|_____|_____ " << std::endl;
-    std::cout << "     |     | " << std::endl;
-    std::cout << "  " << position_7 << "  " << "|" << "  " << position_8 << "  " << "|" << "  " << position_9 << "  " << std::endl;
-    std::cout << "     |     | " << std::endl;
-
-
-
-    char player1 = 'x';
-    char player2 = 'o';
-
-    std::cout << "Player 1 enter a number on the board to place an x." << std::endl;
-    */
-
-    // take playe 1 input and assign it to a position on the board using "x"
-    // take player 2 input and assign it to the board using "o"
-    // repeat until one player gets 3 in a row or end game if there is a draw
 }
